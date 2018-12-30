@@ -736,7 +736,7 @@ public final class LocationTracker: NSObject, CLLocationManagerDelegate {
 
 	//MARK: - CLLocationManager Location Tracking Delegate
 	
-	@objc open func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    @objc public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
 		locationRequests.forEach { $0.dispatchAuthChange(self.lastStatus, status) }
 		self.lastStatus = status
 		
@@ -787,7 +787,7 @@ public final class LocationTracker: NSObject, CLLocationManagerDelegate {
 	
 	//MARK: CLLocationManager Error Delegate
 	
-	@objc open func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    @objc public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
 		locationRequests.iterate({ return $0.frequency.isDeferredFrequency }, {
 			$0.dispatch(error: error)
 		})

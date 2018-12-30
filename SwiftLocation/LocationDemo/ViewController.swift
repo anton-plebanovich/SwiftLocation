@@ -12,10 +12,10 @@ import CoreLocation
 
 public extension UITextView {
 	public func scrollBottom() {
-		guard self.text.characters.count > 0 else {
+		guard self.text.count > 0 else {
 			return
 		}
-		let stringLength:Int = self.text.characters.count
+		let stringLength:Int = self.text.count
 		self.scrollRangeToVisible(NSMakeRange(stringLength-1, 0))
 	}
 }
