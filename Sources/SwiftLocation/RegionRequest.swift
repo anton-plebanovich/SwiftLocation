@@ -137,13 +137,13 @@ public class RegionRequest: Request {
 	}
 
 	/// Unique identifier of the request
-	private var identifier = NSUUID().uuidString
+	private let identifier = NSUUID().uuidString
 	
 	/// Remove request if an error occours
 	public var cancelOnError: Bool = false
     
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(description.hashValue)
+        hasher.combine(identifier.hashValue)
     }
 	
 	/// Description of the request
