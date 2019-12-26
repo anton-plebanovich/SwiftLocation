@@ -102,7 +102,7 @@ public class LocationRequest: Request {
 	
 	/// This represent the current state of the Request
 	internal var _previousState: RequestState = .idle
-	internal(set) var _state: RequestState = .idle {
+    var _state: RequestState = .idle {
 		didSet {
 			if _previousState != _state {
 				onStateChange?(_previousState,_state)
@@ -201,11 +201,10 @@ public class LocationRequest: Request {
 			return .inuse
 		}
 	}
-	
-	/// Implementation of the hash function
-	public var hashValue: Int {
-		return identifier.hash
-	}
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(description.hashValue)
+    }
 	
 	//MARK: Timeout Support
 	

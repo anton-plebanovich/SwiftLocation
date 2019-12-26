@@ -101,7 +101,7 @@ public class GeocoderRequest: Request {
 	
 	/// This represent the current state of the Request
 	internal var _previousState: RequestState = .idle
-	internal(set) var _state: RequestState = .idle {
+    var _state: RequestState = .idle {
 		didSet {
 			if _previousState != _state {
 				onStateChange?(_previousState,_state)
@@ -197,11 +197,10 @@ public class GeocoderRequest: Request {
 		guard let callback = callback else { return }
 		self.registeredCallbacks.append(callback)
 	}
-	
-	/// Implementation of the hash function
-	public var hashValue: Int {
-		return identifier.hash
-	}
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier.hash)
+    }
 	
 	/// Authorization required by the operation
 	public var requiredAuth: Authorization {

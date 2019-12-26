@@ -55,7 +55,7 @@ public class HeadingRequest: Request {
 	
 	/// This represent the current state of the Request
 	internal var _previousState: RequestState = .idle
-	internal(set) var _state: RequestState = .idle {
+    var _state: RequestState = .idle {
 		didSet {
 			if _previousState != _state {
 				onStateChange?(_previousState,_state)
@@ -173,11 +173,10 @@ public class HeadingRequest: Request {
 	
 	/// Unique identifier of the request
 	private var identifier = NSUUID().uuidString
-	
-	/// Hash value for Hashable protocol
-	public var hashValue: Int {
-		return identifier.hash
-	}
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(description.hashValue)
+    }
 	
 	
 	/// Dispatch error to callbacks and remove request from queue if `cancelOnError` is `true`.

@@ -105,7 +105,8 @@ extension CLAuthorizationStatus: CustomStringConvertible {
 		case .denied:				return "Denied"
 		case .notDetermined:		return "Not Determined"
 		case .restricted:			return "Restricted"
-		}
+        @unknown default:           return "Unknown"
+        }
 	}
 	
 }

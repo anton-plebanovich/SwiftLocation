@@ -71,11 +71,10 @@ public class VisitsRequest: Request {
 	
 	/// Assigned request name, used for your own convenience
 	public var name: String?
-	
-	/// Hash value for Hashable protocol
-	public var hashValue: Int {
-		return identifier.hash
-	}
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier.hash)
+    }
 	
 	/// Callback to call when request's state did change
 	public var onStateChange: ((_ old: RequestState, _ new: RequestState) -> (Void))?
@@ -84,7 +83,7 @@ public class VisitsRequest: Request {
 	
 	/// This represent the current state of the Request
 	internal var _previousState: RequestState = .idle
-	internal(set) var _state: RequestState = .idle {
+    var _state: RequestState = .idle {
 		didSet {
 			if _previousState != _state {
 				onStateChange?(_previousState,_state)

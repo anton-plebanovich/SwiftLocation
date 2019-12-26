@@ -11,7 +11,7 @@ import SwiftLocation
 import CoreLocation
 
 public extension UITextView {
-	public func scrollBottom() {
+    func scrollBottom() {
 		guard self.text.count > 0 else {
 			return
 		}
@@ -22,7 +22,7 @@ public extension UITextView {
 
 public extension CLLocation {
 	
-	public var shortDesc: String {
+    var shortDesc: String {
 		return "- lat,lng=\(self.coordinate.latitude),\(self.coordinate.longitude), h-acc=\(self.horizontalAccuracy) mts\n"
 	}
 	

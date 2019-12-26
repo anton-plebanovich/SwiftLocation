@@ -97,10 +97,10 @@ public enum RequestState: CustomStringConvertible, Equatable, Hashable {
 		default:									return false
 		}
 	}
-	
-	public var hashValue: Int {
-		return self.description.hashValue
-	}
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(description.hashValue)
+    }
 	
 	public var description: String {
 		switch self {
@@ -287,7 +287,8 @@ public enum LocAuth {
 		case .restricted:			return .restricted
 		case .authorizedAlways:		return .alwaysAuthorized
 		case .authorizedWhenInUse:	return .inUseAuthorized
-		}
+        @unknown default: return .undetermined
+        }
 	}
 	
 	/// Permission was granted by the user
@@ -307,7 +308,7 @@ public enum LocAuth {
 public extension CLLocationManager {
 	
 	/// Evaluate current application status
-	public static var appAuthorization: Authorization {
+    static var appAuthorization: Authorization {
 		guard	let path = Bundle.main.path(forResource: "Info", ofType: "plist"),
 				let dict = NSDictionary(contentsOfFile: path) else {
 			return .none
@@ -335,7 +336,7 @@ public extension CLLocationManager {
 	
 	
 	/// Background location services are enabled
-	public static var isBackgroundUpdateEnabled: Bool {
+    static var isBackgroundUpdateEnabled: Bool {
 		if let backgroundModes = Bundle.main.object(forInfoDictionaryKey: "UIBackgroundModes") as? NSArray {
 			if backgroundModes.contains("location") && backgroundModes.contains("fetch") {
 				return true

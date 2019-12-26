@@ -100,7 +100,7 @@ public class RegionRequest: Request {
 	
 	/// This represent the current state of the Request
 	internal var _previousState: RequestState = .idle
-	internal(set) var _state: RequestState = .idle {
+    var _state: RequestState = .idle {
 		didSet {
 			if _previousState != _state {
 				onStateChange?(_previousState,_state)
@@ -141,11 +141,10 @@ public class RegionRequest: Request {
 	
 	/// Remove request if an error occours
 	public var cancelOnError: Bool = false
-	
-	/// Hash value for Hashable protocol
-	public var hashValue: Int {
-		return identifier.hash
-	}
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(description.hashValue)
+    }
 	
 	/// Description of the request
 	public var description: String {

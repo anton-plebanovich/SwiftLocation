@@ -46,6 +46,7 @@ extension CLActivityType: CustomStringConvertible {
 		case .other:				return "Other"
 		case .otherNavigation:		return "Navigation"
         case .airborne:             return "Airborne"
+        @unknown default:           return "Unknown"
         }
 	}
 }
